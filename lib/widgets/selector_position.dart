@@ -5,6 +5,7 @@ import 'package:manage_volleyball_team/models/positions/opposite.dart';
 import 'package:manage_volleyball_team/models/positions/outside_hitter.dart';
 import 'package:manage_volleyball_team/models/positions/position.dart';
 import 'package:manage_volleyball_team/models/positions/setter.dart';
+import 'package:manage_volleyball_team/utils/text_style.dart';
 
 class PositionSelector extends StatefulWidget {
   const PositionSelector(
@@ -31,13 +32,17 @@ class _PositionSelectorState extends State<PositionSelector> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<Position>(
-      hint: Text('Selecione uma posição'),
+      hint: Text('Selecione uma posição', style: AppTextStyle.titlePlayerCard),
       value: selectedPosition,
       onChanged: widget.callBack,
+      style: AppTextStyle.titlePlayerCard,
       items: positions.map<DropdownMenuItem<Position>>((Position position) {
         return DropdownMenuItem<Position>(
           value: position,
-          child: Text(position.name),
+          child: Text(
+            position.name,
+            style: AppTextStyle.titlePlayerCard,
+          ),
         );
       }).toList(),
     );
