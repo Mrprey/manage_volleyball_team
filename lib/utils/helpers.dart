@@ -1,0 +1,1 @@
+// Adicione funções auxiliares aqui
