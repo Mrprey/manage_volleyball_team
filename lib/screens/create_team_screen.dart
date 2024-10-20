@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:manage_volleyball_team/models/player.dart';
 import 'package:manage_volleyball_team/models/positions/position.dart';
 import 'package:manage_volleyball_team/utils/app_colors.dart';
+import 'package:manage_volleyball_team/utils/app_localizations.dart';
 import 'package:manage_volleyball_team/utils/text_style.dart';
 import 'package:manage_volleyball_team/widgets/player_card.dart';
 import 'package:manage_volleyball_team/widgets/selector_position.dart';
@@ -30,8 +31,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
       });
       _nameController.clear();
       _numberController.clear();
-      _positionSelected = null; // Reseta a posição após adicionar o jogador
-      // Atualiza o seletor de posição
+      _positionSelected = null;
       _setPosition(null);
     }
   }
@@ -45,7 +45,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Adicionar jogadores')),
+      appBar: AppBar(title: Text(I18n.t(context, 'player.add_players'))),
       body: Row(
         children: [
           editPlayer(),
@@ -72,7 +72,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
   ElevatedButton addPlayerButton() {
     return ElevatedButton(
       onPressed: _addPlayer,
-      child: Text('Adicionar Jogador'),
+      child: Text(I18n.t(context, 'add_player')),
     );
   }
 
@@ -98,7 +98,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
       controller: _numberController,
       style: AppTextStyle.titlePlayerCard,
       decoration: InputDecoration(
-        labelText: 'Número do Jogador',
+        labelText: I18n.t(context, 'player.player_number'),
         labelStyle: AppTextStyle.titlePlayerCard,
       ),
       keyboardType: TextInputType.number,
@@ -110,7 +110,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
       controller: _nameController,
       style: AppTextStyle.titlePlayerCard,
       decoration: InputDecoration(
-        labelText: 'Nome do Jogador',
+        labelText: I18n.t(context, 'player.player_name'),
         labelStyle: AppTextStyle.titlePlayerCard,
       ),
     );

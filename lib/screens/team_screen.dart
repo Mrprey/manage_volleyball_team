@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manage_volleyball_team/screens/create_team_screen.dart';
+import 'package:manage_volleyball_team/utils/app_localizations.dart';
 
 class TeamScreen extends StatelessWidget {
   const TeamScreen({super.key});
@@ -8,7 +9,7 @@ class TeamScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Equipe'),
+        title: Text(I18n.t(context, 'team.team')),
       ),
       body: Center(
         child: ElevatedButton(
@@ -18,7 +19,7 @@ class TeamScreen extends StatelessWidget {
               MaterialPageRoute(builder: (context) => CreateTeamScreen()),
             );
           },
-          child: Text('Criar Novo Time'),
+          child: Text(I18n.t(context, 'edit_team')),
         ),
       ),
     );
