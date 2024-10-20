@@ -7,14 +7,14 @@ import 'package:manage_volleyball_team/utils/text_style.dart';
 import 'package:manage_volleyball_team/widgets/player_card.dart';
 import 'package:manage_volleyball_team/widgets/selector_position.dart';
 
-class CreateTeamScreen extends StatefulWidget {
-  const CreateTeamScreen({super.key});
+class EditPlayersScreen extends StatefulWidget {
+  const EditPlayersScreen({super.key});
 
   @override
-  _CreateTeamScreenState createState() => _CreateTeamScreenState();
+  _EditPlayersScreenState createState() => _EditPlayersScreenState();
 }
 
-class _CreateTeamScreenState extends State<CreateTeamScreen> {
+class _EditPlayersScreenState extends State<EditPlayersScreen> {
   final List<Player> _players = [];
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
