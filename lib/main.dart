@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n_delegate.dart';
 import 'package:flutter_i18n/loaders/file_translation_loader.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:manage_volleyball_team/blocs/provider/team_provider.dart';
 import 'package:manage_volleyball_team/routes.dart';
 import 'package:manage_volleyball_team/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 
 const String appTitle = 'Manage Volleyball Team';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(create: (_) => TeamProvider(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
