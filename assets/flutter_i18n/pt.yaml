@@ -1,0 +1,10 @@
+title: "Gerenciador de Voleibol"
+edit_team: "Editar time"
+player:
+  add_player: "Adicionar Jogador"
+  add_players: "Adicionar Jogadores"
+  player_name: "Nome do Jogador"
+  player_number: "Número do Jogador"
+  select_position: "Selecione a Posição"
+team:
+  team: "Time"
