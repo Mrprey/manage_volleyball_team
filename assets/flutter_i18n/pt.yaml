@@ -7,4 +7,4 @@ player:
   player_number: "Número do Jogador"
   select_position: "Selecione a Posição"
 team:
-  team: "Time"
+  teams: "Times"

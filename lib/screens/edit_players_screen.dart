@@ -1,37 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:manage_volleyball_team/blocs/provider/team_provider.dart';
 import 'package:manage_volleyball_team/models/player.dart';
 import 'package:manage_volleyball_team/models/positions/position.dart';
+import 'package:manage_volleyball_team/models/team.dart';
 import 'package:manage_volleyball_team/utils/app_colors.dart';
 import 'package:manage_volleyball_team/utils/app_localizations.dart';
 import 'package:manage_volleyball_team/utils/text_style.dart';
 import 'package:manage_volleyball_team/widgets/player_card.dart';
 import 'package:manage_volleyball_team/widgets/selector_position.dart';
+import 'package:provider/provider.dart';
 
-class CreateTeamScreen extends StatefulWidget {
-  const CreateTeamScreen({super.key});
+class EditPlayersScreen extends StatefulWidget {
+  const EditPlayersScreen(this.team, {super.key});
+
+  final Team team;
 
   @override
-  _CreateTeamScreenState createState() => _CreateTeamScreenState();
+  _EditPlayersScreenState createState() => _EditPlayersScreenState();
 }
 
-class _CreateTeamScreenState extends State<CreateTeamScreen> {
-  final List<Player> _players = [];
+class _EditPlayersScreenState extends State<EditPlayersScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
   Position? _positionSelected;
 
-  void _addPlayer() {
+  Team get team => widget.team;
+  List<Player> get players => team.players;
+
+  void _addPlayer(TeamProvider teamProvider) {
     final String name = _nameController.text;
     final int number = int.tryParse(_numberController.text) ?? 0;
 
     if (name.isNotEmpty && _positionSelected != null && number > 0) {
       setState(() {
-        _players.add(
-            Player(name: name, position: _positionSelected!, number: number));
+        teamProvider.addPlayer(
+          team,
+          Player(name: name, position: _positionSelected!, number: number),
+        );
       });
       _nameController.clear();
       _numberController.clear();
-      _positionSelected = null;
       _setPosition(null);
     }
   }
@@ -47,10 +55,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(I18n.t(context, 'player.add_players'))),
       body: Row(
-        children: [
-          editPlayer(),
-          showPlayers(),
-        ],
+        children: [editPlayer(), showPlayers()],
       ),
     );
   }
@@ -69,10 +74,13 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
     );
   }
 
-  ElevatedButton addPlayerButton() {
-    return ElevatedButton(
-      onPressed: _addPlayer,
-      child: Text(I18n.t(context, 'add_player')),
+  Widget addPlayerButton() {
+    return ChangeNotifierProvider(
+      create: (_) => TeamProvider(),
+      child: ElevatedButton(
+        onPressed: () => _addPlayer.call(Provider.of<TeamProvider>(context)),
+        child: Text(I18n.t(context, 'add_player')),
+      ),
     );
   }
 
@@ -81,9 +89,9 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> {
       child: Container(
         color: AppColors.background,
         child: ListView.builder(
-          itemCount: _players.length,
+          itemCount: players.length,
           itemBuilder: (context, index) {
-            return PlayerCard(player: _players[index]);
+            return PlayerCard(player: players[index]);
           },
         ),
       ),
